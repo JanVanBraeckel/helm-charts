@@ -3,6 +3,16 @@ entries:
   node-red:
   - apiVersion: v2
     appVersion: 1.16.0
+    created: "2020-06-19T20:13:51.889580849Z"
+    description: A Helm chart for Kubernetes
+    digest: 304c3d7acc2af5ba0afae2f93a6184230c6f9ebf9f14d9c3d82ea29c7d281934
+    name: node-red
+    type: application
+    urls:
+    - https://github.com/JanVanBraeckel/helm-charts/releases/download/node-red-0.1.3/node-red-0.1.3.tgz
+    version: 0.1.3
+  - apiVersion: v2
+    appVersion: 1.16.0
     created: "2020-06-19T21:14:15.7428418+02:00"
     description: A Helm chart for Kubernetes
     digest: 3e7e5368c5a6e5067bbf68bddc38b17d2c442ed4621530fc1e302c4bde746812

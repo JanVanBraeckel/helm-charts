@@ -1,14 +1,13 @@
-# Default values for node-red.
-# This is a YAML-formatted file.
-# Declare variables to be passed into your templates.
+timezone: "Europe/Brussels"
+flows: "flows.json"
 
 replicaCount: 1
 
 image:
-  repository: nginx
+  repository: nodered/node-red
   pullPolicy: IfNotPresent
   # Overrides the image tag whose default is the chart appVersion.
-  tag: ""
+  tag: 1.0.6-12-minimal
 
 imagePullSecrets: []
 nameOverride: ""
@@ -25,10 +24,12 @@ serviceAccount:
 
 podAnnotations: {}
 
-podSecurityContext: {}
+podSecurityContext:
+  {}
   # fsGroup: 2000
 
-securityContext: {}
+securityContext:
+  {}
   # capabilities:
   #   drop:
   #   - ALL
@@ -38,22 +39,40 @@ securityContext: {}
 
 service:
   type: ClusterIP
-  port: 80
+  port: 1880
 
 ingress:
   enabled: false
-  annotations: {}
-    # kubernetes.io/ingress.class: nginx
-    # kubernetes.io/tls-acme: "true"
+  annotations:
+    nginx.ingress.kubernetes.io/backend-protocol: HTTPS
+    nginx.ingress.kubernetes.io/configuration-snippet: rewrite ^(/node-red)$ $1/ permanent;
+    nginx.ingress.kubernetes.io/rewrite-target: /$2
   hosts:
-    - host: chart-example.local
-      paths: []
+    - paths: ["/node-red(/|$)(.*)"]
   tls: []
   #  - secretName: chart-example-tls
   #    hosts:
   #      - chart-example.local
 
-resources: {}
+persistence:
+  enabled: false
+  ## node-red data Persistent Volume Storage Class
+  ## If defined, storageClassName: <storageClass>
+  ## If set to "-", storageClassName: "", which disables dynamic provisioning
+  ## If undefined (the default) or set to null, no storageClassName spec is
+  ##   set, choosing the default provisioner.  (gp2 on AWS, standard on
+  ##   GKE, AWS & OpenStack)
+  # storageClass: "-"
+  ## If you want to reuse an existing claim, you can pass the name of the PVC using
+  ## the existingClaim variable
+  # existingClaim: your-claim
+  accessMode: ReadWriteOnce
+  size: 5Gi
+  ## When mounting the data volume you may specify a subPath
+  # subPath: /configs/node-red
+
+resources:
+  {}
   # We usually recommend not to specify default resources and to leave this as a conscious
   # choice for the user. This also increases chances charts run on environments with little
   # resources, such as Minikube. If you do want to specify resources, uncomment the following

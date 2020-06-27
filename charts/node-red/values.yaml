@@ -56,6 +56,14 @@ ingress:
 
 persistence:
   enabled: false
+  ## when using local, this will create a PersistentVolume to a local path on your device
+  ## for example
+  ## local: true
+  ## storageClass: "manual"
+  ## path: "/data"
+  ## will create a PersistentVolume that the claim can use, so you can save to your /data folder
+  ## only useful in single-node clusters
+  local: false
   ## node-red data Persistent Volume Storage Class
   ## If defined, storageClassName: <storageClass>
   ## If set to "-", storageClassName: "", which disables dynamic provisioning
@@ -68,8 +76,9 @@ persistence:
   # existingClaim: your-claim
   accessMode: ReadWriteOnce
   size: 5Gi
+  path: "/data"
   ## When mounting the data volume you may specify a subPath
-  # subPath: /configs/node-red
+  # subPath: k8s/node-red
 
 resources:
   {}

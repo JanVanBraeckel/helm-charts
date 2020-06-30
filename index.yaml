@@ -1,6 +1,39 @@
 apiVersion: v1
 entries:
+  mosquitto:
+  - apiVersion: v2
+    appVersion: 1.6.10
+    created: "2020-06-30T16:47:14.815843002Z"
+    description: Eclipse Mosquitto is an open source message broker which implements
+      MQTT version 5, 3.1.1 and 3.1.
+    digest: 4908c51365e919c47a997ab8b78d93172e77c7ee4f3f64b2cb5ac0b208df5e44
+    home: https://github.com/JanVanBraeckel/helm-charts
+    icon: https://raw.githubusercontent.com/docker-library/docs/757578e3a44e5460a8a11d32a81776f8b74231a9/eclipse-mosquitto/logo.png
+    maintainers:
+    - email: contact@janvanbraeckel.com
+      name: JanVanBraeckel
+    name: mosquitto
+    type: application
+    urls:
+    - https://github.com/JanVanBraeckel/helm-charts/releases/download/mosquitto-0.1.0/mosquitto-0.1.0.tgz
+    version: 0.1.0
   node-red:
+  - apiVersion: v2
+    appVersion: 1.0.6-12
+    created: "2020-06-30T16:47:14.908595841Z"
+    description: Node-RED is a flow-based programming tool, originally developed by
+      IBM’s Emerging Technology Services team and now a part of the JS Foundation.
+    digest: 4eb3ef34c00340c153170d07d80d341d220dfdf9ab3e589c264aa260e9141fbc
+    home: https://github.com/JanVanBraeckel/helm-charts
+    icon: https://nodered.org/about/resources/media/node-red-icon-2.png
+    maintainers:
+    - email: contact@janvanbraeckel.com
+      name: JanVanBraeckel
+    name: node-red
+    type: application
+    urls:
+    - https://github.com/JanVanBraeckel/helm-charts/releases/download/node-red-0.1.8/node-red-0.1.8.tgz
+    version: 0.1.8
   - apiVersion: v2
     appVersion: 1.0.6-12
     created: "2020-06-27T11:18:34.282115229Z"

@@ -1,0 +1,1 @@
+For exposing the MQTT TCP socket via ingress, check out [https://kubernetes.github.io/ingress-nginx/user-guide/exposing-tcp-udp-services/](https://kubernetes.github.io/ingress-nginx/user-guide/exposing-tcp-udp-services/)

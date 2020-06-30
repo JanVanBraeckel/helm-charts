@@ -1,10 +1,7 @@
-timezone: "Europe/Brussels"
-flows: "flows.json"
-
 replicaCount: 1
 
 image:
-  repository: nodered/node-red
+  repository: eclipse-mosquitto
   pullPolicy: IfNotPresent
   # Overrides the image tag whose default is the chart appVersion.
   tag: "{{ .Chart.AppVersion }}"
@@ -39,20 +36,7 @@ securityContext:
 
 service:
   type: ClusterIP
-  port: 1880
-
-ingress:
-  enabled: false
-  annotations:
-    nginx.ingress.kubernetes.io/backend-protocol: HTTP
-    nginx.ingress.kubernetes.io/configuration-snippet: rewrite ^(/node-red)$ $1/ permanent;
-    nginx.ingress.kubernetes.io/rewrite-target: /
-  hosts:
-    - paths: ["/node-red(/|$)(.*)"]
-  tls: []
-  #  - secretName: chart-example-tls
-  #    hosts:
-  #      - chart-example.local
+  port: 1883
 
 persistence:
   enabled: false
@@ -64,7 +48,7 @@ persistence:
   ## will create a PersistentVolume that the claim can use, so you can save to your /data folder
   ## only useful in single-node clusters
   local: false
-  ## node-red data Persistent Volume Storage Class
+  ## mosquitto data Persistent Volume Storage Class
   ## If defined, storageClassName: <storageClass>
   ## If set to "-", storageClassName: "", which disables dynamic provisioning
   ## If undefined (the default) or set to null, no storageClassName spec is
@@ -78,7 +62,7 @@ persistence:
   size: 5Gi
   path: "/data"
   ## When mounting the data volume you may specify a subPath
-  # subPath: k8s/node-red
+  # subPath: mosquitto
 
 resources:
   {}

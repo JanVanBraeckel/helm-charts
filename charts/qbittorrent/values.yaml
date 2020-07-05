@@ -95,6 +95,7 @@ persistence:
   ## enable here to use the same claim for both config and media, with different sub paths
   ## if enabled, will ignore the enabled flag in config/media and the existingClaim
   enabled: false
+  # existingClaim: ""
 
   config:
     enabled: true

@@ -168,4 +168,21 @@ entries:
     urls:
     - https://github.com/JanVanBraeckel/helm-charts/releases/download/qbittorrent-0.1.1/qbittorrent-0.1.1.tgz
     version: 0.1.1
+  radarr:
+  - apiVersion: v2
+    appVersion: v0.2.0.1504-ls17
+    created: "2020-07-05T17:46:05.788098453Z"
+    description: Radarr is an independent fork of Sonarr reworked for automatically
+      downloading movies via Usenet and BitTorrent.
+    digest: 6fe7e42a1931fa269c910af9fc76af8de038cf49896020968c070f0fd7cf911e
+    home: https://github.com/JanVanBraeckel/helm-charts
+    icon: https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/radarr.png
+    maintainers:
+    - email: contact@janvanbraeckel.com
+      name: JanVanBraeckel
+    name: radarr
+    type: application
+    urls:
+    - https://github.com/JanVanBraeckel/helm-charts/releases/download/radarr-0.1.1/radarr-0.1.1.tgz
+    version: 0.1.1
 generated: "2020-06-19T21:14:15.4529201+02:00"

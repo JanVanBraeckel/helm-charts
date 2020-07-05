@@ -88,19 +88,19 @@ spec:
       {{- if .Values.persistence.enabled }}
       - name: data
         persistentVolumeClaim:
-          claimName: {{ if .Values.persistence.existingClaim }}{{ .Values.persistence.existingClaim }}{{- else }}{{ template "sonarr.fullname" . }}-config{{- end}}
+          claimName: {{ if .Values.persistence.existingClaim }}{{ .Values.persistence.existingClaim }}{{- else }}{{ template "qbittorrent.fullname" . }}-config{{- end}}
       {{- else }}
       - name: config
       {{- if .Values.persistence.config.enabled }}
         persistentVolumeClaim:
-          claimName: {{ if .Values.persistence.config.existingClaim }}{{ .Values.persistence.config.existingClaim }}{{- else }}{{ template "sonarr.fullname" . }}-config{{- end }}
+          claimName: {{ if .Values.persistence.config.existingClaim }}{{ .Values.persistence.config.existingClaim }}{{- else }}{{ template "qbittorrent.fullname" . }}-config{{- end }}
       {{- else }}
         emptyDir: {}
       {{- end }}
       - name: downloads
       {{- if .Values.persistence.downloads.enabled }}
         persistentVolumeClaim:
-          claimName: {{ if .Values.persistence.downloads.existingClaim }}{{ .Values.persistence.downloads.existingClaim }}{{- else }}{{ template "sonarr.fullname" . }}-downloads{{- end }}
+          claimName: {{ if .Values.persistence.downloads.existingClaim }}{{ .Values.persistence.downloads.existingClaim }}{{- else }}{{ template "qbittorrent.fullname" . }}-downloads{{- end }}
       {{- else }}
         emptyDir: {}
       {{- end }}

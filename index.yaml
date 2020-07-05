@@ -151,4 +151,21 @@ entries:
     urls:
     - https://github.com/JanVanBraeckel/helm-charts/releases/download/plex-0.1.1/plex-0.1.1.tgz
     version: 0.1.1
+  qbittorrent:
+  - apiVersion: v2
+    appVersion: 2.0.0.5344-ls69
+    created: "2020-07-05T17:45:05.836370412Z"
+    description: The qBittorrent project aims to provide an open-source software alternative
+      to µTorrent.
+    digest: 6d203cd8eb5b0931606648a680961d66e26b7f291188b80f25ab03b3f6ab0bac
+    home: https://github.com/JanVanBraeckel/helm-charts
+    icon: https://www.qbittorrent.org/img/qb_banner.png
+    maintainers:
+    - email: contact@janvanbraeckel.com
+      name: JanVanBraeckel
+    name: qbittorrent
+    type: application
+    urls:
+    - https://github.com/JanVanBraeckel/helm-charts/releases/download/qbittorrent-0.1.1/qbittorrent-0.1.1.tgz
+    version: 0.1.1
 generated: "2020-06-19T21:14:15.4529201+02:00"

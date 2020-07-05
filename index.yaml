@@ -134,4 +134,21 @@ entries:
     urls:
     - https://github.com/JanVanBraeckel/helm-charts/releases/download/node-red-0.1.0/node-red-0.1.0.tgz
     version: 0.1.0
+  plex:
+  - apiVersion: v2
+    appVersion: 1.19.4.2935-79e214ead
+    created: "2020-07-05T17:40:52.234940043Z"
+    description: Plex Media Server (PMS) is the back-end media server component of
+      Plex, free of charge.
+    digest: c4f2805def9415aba6ccd68291fb042d8cdeb7d0b6c3cc9ffc0f4a0d98e50197
+    home: https://github.com/JanVanBraeckel/helm-charts
+    icon: https://www.plex.tv/wp-content/themes/plex/assets/img/plex-logo.svg
+    maintainers:
+    - email: contact@janvanbraeckel.com
+      name: JanVanBraeckel
+    name: plex
+    type: application
+    urls:
+    - https://github.com/JanVanBraeckel/helm-charts/releases/download/plex-0.1.1/plex-0.1.1.tgz
+    version: 0.1.1
 generated: "2020-06-19T21:14:15.4529201+02:00"

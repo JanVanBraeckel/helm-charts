@@ -1,3 +1,11 @@
 # helm-charts
 
-Most of these charts are based off of the excellent [https://github.com/billimek/billimek-charts](https://github.com/billimek/billimek-charts), adapted to suit my own needs.
+Helm Chart Monorepo
+
+## Upload
+
+`cr upload --config $HOME/.cr.yaml`
+
+## Index
+
+`cr index --config $HOME/.cr.yaml -i ./index.yaml -p .deploy`

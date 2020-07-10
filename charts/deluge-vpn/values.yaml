@@ -1,0 +1,146 @@
+# Default values for deluge.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+# upgrade strategy type (e.g. Recreate or RollingUpdate)
+strategyType: Recreate
+
+# Probes configuration
+probes:
+  liveness:
+    initialDelaySeconds: 60
+    failureThreshold: 5
+    timeoutSeconds: 10
+  readiness:
+    initialDelaySeconds: 60
+    failureThreshold: 5
+    timeoutSeconds: 10
+
+nameOverride: ""
+fullnameOverride: ""
+
+puid: 1000
+pgid: 1000
+umask: 022
+
+image:
+  repository: janvanbraeckel/delugevpn
+  tag: 1.0.1
+  pullPolicy: IfNotPresent
+# resources:
+#   requests:
+#     cpu: "50m"
+#     memory: "50Mi"
+#   limits:
+#     memory: "1Gi"
+
+# ref: https://github.com/JanVanBraeckel/deluge#environment-variables
+vpn:
+  # For VPN_ENABLED environment variable
+  enabled: false
+  # For VPN_USERNAME environment variable
+  username: "vpnUsername"
+  # For VPN_PASSWORD environment variable
+  password: "vpnPassword"
+
+  cert: |-
+    -----BEGIN CERTIFICATE-----
+    -----END CERTIFICATE-----
+
+  # VPN provider. Currently only supports mullvad
+  provider: mullvad
+
+  # List of hosts and port can be found in https://mullvad.net/en/servers/
+  hosts:
+    - be-bru-003.mullvad.net 1196
+    - be-bru-001.mullvad.net 1196
+    - be-bru-002.mullvad.net 1196
+
+  # LAN subnet that includes all worker nodes' podCIDR. Leave as default would work in most cases.
+  # # LAN_NETWORK environment variable
+  lanNetwork: "10.0.0.0/8"
+
+# Port deluge UI listens on
+# ref: https://github.com/JanVanBraeckel/deluge#environment-variables
+# For WEBUI_PORT_ENV environment variable
+uiPort: 8112
+
+# Kubernetes configuration
+# For minikube, set this to NodePort, elsewhere use LoadBalancer
+#
+guiService:
+  type: ClusterIP
+  port: 8112
+  ## Specify the nodePort value for the LoadBalancer and NodePort service types.
+  ## ref: https://kubernetes.io/docs/concepts/services-networking/service/#type-nodeport
+  ##
+  # nodePort:
+  ## Provide any additional annotations which may be required. This can be used to
+  ## set the LoadBalancer service type to internal only.
+  ## ref: https://kubernetes.io/docs/concepts/services-networking/service/#internal-load-balancer
+  ##
+  annotations: {}
+  labels: {}
+  ## Use loadBalancerIP to request a specific static IP,
+  ## otherwise leave blank
+  ##
+  loadBalancerIP:
+  # loadBalancerSourceRanges: []
+  ## Set the externalTrafficPolicy in the Service to either Cluster or Local
+  # externalTrafficPolicy: Cluster
+
+# Enable persistence using Persistent Volume Claims
+# ref: http://kubernetes.io/docs/user-guide/persistent-volumes/
+#
+persistence:
+  ## enable here to use the same claim for both config and media, with different sub paths
+  ## if enabled, will ignore the enabled flag in config/media and the existingClaim
+  enabled: false
+  # existingClaim: ""
+
+  config:
+    enabled: true
+    accessMode: ReadWriteOnce
+    size: 128Mi
+    subPath: ""
+    skipuninstall: false
+    # storageClass: ""
+  # Stores the downloaded torrents
+  downloads:
+    enabled: true
+    accessMode: ReadWriteOnce
+    size: 10Gi
+    subPath: ""
+    skipuninstall: false
+    # storageClass: ""
+
+# Configure the ingress resource that allows you to access the
+# ref: http://kubernetes.io/docs/user-guide/ingress/
+#
+ingress:
+  enabled: false
+  annotations:
+    {}
+    # kubernetes.io/ingress.class: nginx
+    # kubernetes.io/tls-acme: "true"
+  path: /
+  hosts:
+    - chart-example.local
+  tls: []
+  #  - secretName: chart-example-tls
+  #    hosts:
+  #      - chart-example.local
+
+# Extra environtment variables to append to deployment
+# ref: https://github.com/JanVanBraeckel/deluge#environment-variables
+extraEnvVars: {}
+
+nodeSelector: {}
+
+tolerations: []
+
+affinity: {}
+
+podAnnotations: {}
+
+deploymentAnnotations: {}

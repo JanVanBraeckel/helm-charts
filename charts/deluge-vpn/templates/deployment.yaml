@@ -1,0 +1,153 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ template "deluge.fullname" . }}
+  {{- if .Values.deploymentAnnotations }}
+  annotations:
+    {{- range $key, $value := .Values.deploymentAnnotations }}
+    {{ $key }}: {{ $value | quote }}
+    {{- end }}
+  {{- end }}
+  labels:
+    app.kubernetes.io/name: {{ include "deluge.name" . }}
+    helm.sh/chart: {{ include "deluge.chart" . }}
+    app.kubernetes.io/instance: {{ .Release.Name }}
+    app.kubernetes.io/managed-by: {{ .Release.Service }}
+spec:
+  replicas: 1
+  revisionHistoryLimit: 3
+  strategy:
+    type: {{ .Values.strategyType }}
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: {{ include "deluge.name" . }}
+      app.kubernetes.io/instance: {{ .Release.Name }}
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: {{ include "deluge.name" . }}
+        app.kubernetes.io/instance: {{ .Release.Name }}
+      {{- if .Values.podAnnotations }}
+      annotations:
+        {{- range $key, $value := .Values.podAnnotations }}
+        {{ $key }}: {{ $value | quote }}
+        {{- end }}
+      {{- end }}
+    spec:
+      containers:
+        - name: {{ .Chart.Name }}
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          securityContext:
+            capabilities:
+              add:
+                - NET_ADMIN
+          ports:
+            - name: http
+              containerPort: {{ .Values.uiPort }}
+              protocol: TCP
+            - name: transport-tcp
+              containerPort: 8999
+              protocol: TCP
+            - name: transport-udp
+              containerPort: 8999
+              protocol: UDP
+          livenessProbe:
+            httpGet:
+              path: /
+              port: http
+            initialDelaySeconds: {{ .Values.probes.liveness.initialDelaySeconds }}
+            failureThreshold: {{ .Values.probes.liveness.failureThreshold }}
+            timeoutSeconds: {{ .Values.probes.liveness.timeoutSeconds }}
+          readinessProbe:
+            httpGet:
+              path: /
+              port: http
+            initialDelaySeconds: {{ .Values.probes.readiness.initialDelaySeconds }}
+            failureThreshold: {{ .Values.probes.readiness.failureThreshold }}
+            timeoutSeconds: {{ .Values.probes.readiness.timeoutSeconds }}
+          env:
+          - name: VPN_ENABLED
+          {{- if .Values.vpn.enabled }}
+            value: "yes"
+          {{- else }}
+            value: "no"
+          {{- end }}
+          - name: VPN_USERNAME
+            value: {{ .Values.vpn.username | quote }}
+          - name: VPN_PASSWORD
+            value: {{ .Values.vpn.password | quote }}
+          - name: LAN_NETWORK
+            value: {{ default "10.0.0.0/8" .Values.vpn.lanNetwork | quote }}
+          - name: PUID
+            value: "{{ .Values.puid }}"
+          - name: PGID
+            value: "{{ .Values.pgid }}"
+          - name: UMASK
+            value: "{{ .Values.umask }}"
+          {{- range $key, $value := .Values.extraEnvVars }}
+          - name: {{ $key }}
+            value: {{ $value | quote }}
+          {{- end }}
+          volumeMounts:
+            - mountPath: /dev/net/tun
+              name: dev-tun
+            - mountPath: /config/deluge
+              name: {{ if .Values.persistence.enabled }}data{{- else }}config{{- end}}
+            {{- if .Values.persistence.config.subPath }}
+              subPath: "{{ .Values.persistence.config.subPath }}"
+            {{- end }}
+            - mountPath: /downloads
+              name: {{ if .Values.persistence.enabled }}data{{- else }}downloads{{- end}}
+            {{- if .Values.persistence.downloads.subPath }}
+              subPath: {{ .Values.persistence.downloads.subPath }}
+            {{- end }}
+            - mountPath: /config
+              name: vpn-config
+              readOnly: false
+          resources:
+{{ toYaml .Values.resources | indent 12 }}
+      volumes:
+      - name: dev-tun
+        hostPath:
+          path: /dev/net/tun
+      {{- if .Values.persistence.enabled }}
+      - name: data
+        persistentVolumeClaim:
+          claimName: {{ if .Values.persistence.existingClaim }}{{ .Values.persistence.existingClaim }}{{- else }}{{ template "deluge.fullname" . }}-config{{- end}}
+      {{- else }}
+      - name: config
+      {{- if .Values.persistence.config.enabled }}
+        persistentVolumeClaim:
+          claimName: {{ if .Values.persistence.config.existingClaim }}{{ .Values.persistence.config.existingClaim }}{{- else }}{{ template "deluge.fullname" . }}-config{{- end }}
+      {{- else }}
+        emptyDir: {}
+      {{- end }}
+      - name: downloads
+      {{- if .Values.persistence.downloads.enabled }}
+        persistentVolumeClaim:
+          claimName: {{ if .Values.persistence.downloads.existingClaim }}{{ .Values.persistence.downloads.existingClaim }}{{- else }}{{ template "deluge.fullname" . }}-downloads{{- end }}
+      {{- else }}
+        emptyDir: {}
+      {{- end }}
+      {{- end }}
+      - name: vpn-config
+        {{- if .Values.vpn.enabled }}
+        configMap:
+          name: {{ template "deluge.fullname" . }}-vpn-config
+          defaultMode: 0755
+        {{- else }}
+        emptyDir: {}
+        {{- end }}
+    {{- with .Values.nodeSelector }}
+      nodeSelector:
+{{ toYaml . | indent 8 }}
+    {{- end }}
+    {{- with .Values.affinity }}
+      affinity:
+{{ toYaml . | indent 8 }}
+    {{- end }}
+    {{- with .Values.tolerations }}
+      tolerations:
+{{ toYaml . | indent 8 }}
+    {{- end }}

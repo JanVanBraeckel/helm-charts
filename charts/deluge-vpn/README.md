@@ -39,7 +39,7 @@ The following table lists the configurable parameters for the deluge chart and t
 | Parameter                            | Description                              | Default                                                                               |
 | ------------------------------------ | ---------------------------------------- | ------------------------------------------------------------------------------------- |
 | `image.registry`                     | Container registry                       | `docker.io`                                                                           |
-| `image.repository`                   | Container image to use                   | `janvanbraeckel/deluge`                                                               |
+| `image.repository`                   | Container image to use                   | `janvanbraeckel/delugevpn`                                                            |
 | `image.tag`                          | Container image tag to deploy            | `v1.0.0`                                                                              |
 | `image.pullPolicy`                   | Container pull policy                    | `IfNotPresent`                                                                        |
 | `vpn.enabled`                        | Enable VPN support                       | `false`                                                                               |

@@ -24,7 +24,7 @@ data:
     rcvbuf 524288
     cipher AES-256-CBC
     tls-cipher TLS-DHE-RSA-WITH-AES-256-GCM-SHA384:TLS-DHE-RSA-WITH-AES-256-CBC-SHA
-    proto udp
+    proto {{ .Values.vpn.protocol }}
     auth-user-pass
     ca /config/mullvad_ca.crt
     tun-ipv6

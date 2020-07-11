@@ -65,6 +65,25 @@ entries:
     urls:
     - https://github.com/JanVanBraeckel/helm-charts/releases/download/deluge-0.1.0/deluge-0.1.0.tgz
     version: 0.1.0
+  jackett:
+  - apiVersion: v2
+    appVersion: v0.16.788-ls6
+    created: "2020-07-11T20:38:50.869447418Z"
+    description: 'Jackett works as a proxy server: it translates queries from apps
+      (Sonarr, Radarr, SickRage, CouchPotato, Mylar, Lidarr, DuckieTV, qBittorrent,
+      Nefarious etc.) into tracker-site-specific http queries, parses the html response,
+      then sends results back to the requesting software.'
+    digest: 059d58db50b32bb0c5500436cb0c129d9e6d81f127a7f53085c5971f5bf091f5
+    home: https://github.com/JanVanBraeckel/helm-charts
+    icon: https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/jackett-banner.png
+    maintainers:
+    - email: contact@janvanbraeckel.com
+      name: JanVanBraeckel
+    name: jackett
+    type: application
+    urls:
+    - https://github.com/JanVanBraeckel/helm-charts/releases/download/jackett-0.1.1/jackett-0.1.1.tgz
+    version: 0.1.1
   jackett-vpn:
   - apiVersion: v2
     appVersion: v0.16.817

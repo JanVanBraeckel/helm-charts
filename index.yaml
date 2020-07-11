@@ -3,6 +3,22 @@ entries:
   deluge:
   - apiVersion: v2
     appVersion: 2.0.3
+    created: "2020-07-11T20:32:51.292213626Z"
+    description: Deluge is a lightweight, Free Software, cross-platform BitTorrent
+      client.
+    digest: da8f0610a9dd1a1b1b90181142b448ff63a783564b525cdabea31c9b41dbe6d9
+    home: https://github.com/JanVanBraeckel/helm-charts
+    icon: https://deluge-torrent.org/images/droplet.png
+    maintainers:
+    - email: contact@janvanbraeckel.com
+      name: JanVanBraeckel
+    name: deluge
+    type: application
+    urls:
+    - https://github.com/JanVanBraeckel/helm-charts/releases/download/deluge-0.1.2/deluge-0.1.2.tgz
+    version: 0.1.2
+  - apiVersion: v2
+    appVersion: 2.0.3
     created: "2020-07-11T20:08:17.391145268Z"
     description: Deluge is a lightweight, Free Software, cross-platform BitTorrent
       client.

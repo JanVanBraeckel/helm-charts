@@ -43,6 +43,9 @@ vpn:
   # For VPN_PASSWORD environment variable
   password: "vpnPassword"
 
+  # Mullvad over TCP is usually fastest
+  protocol: "tcp"
+
   cert: |-
     -----BEGIN CERTIFICATE-----
     -----END CERTIFICATE-----
@@ -51,10 +54,12 @@ vpn:
   provider: mullvad
 
   # List of hosts and port can be found in https://mullvad.net/en/servers/
+  # TCP ports are 80 and 443, UDP is 1196
+  # TCP 80 is usually fastest
   hosts:
-    - be-bru-003.mullvad.net 1196
-    - be-bru-001.mullvad.net 1196
-    - be-bru-002.mullvad.net 1196
+    - be-bru-003.mullvad.net 80
+    - be-bru-001.mullvad.net 80
+    - be-bru-002.mullvad.net 80
 
   # LAN subnet that includes all worker nodes' podCIDR. Leave as default would work in most cases.
   # # LAN_NETWORK environment variable

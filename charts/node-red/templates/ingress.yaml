@@ -1,6 +1,7 @@
 {{- if .Values.ingress.enabled -}}
 {{- $fullName := include "node-red.fullname" . -}}
 {{- $svcPort := .Values.service.port -}}
+{{- $ingressPath := .Values.ingress.path -}}
 {{- if semverCompare ">=1.14-0" .Capabilities.KubeVersion.GitVersion -}}
 apiVersion: networking.k8s.io/v1beta1
 {{- else -}}
@@ -27,15 +28,13 @@ spec:
     {{- end }}
   {{- end }}
   rules:
-    {{- range .Values.ingress.hosts }}
-    - http:
+  {{- range .Values.ingress.hosts }}
+    - host: {{ . }}
+      http:
         paths:
-          {{- range .paths }}
-          - path: {{ . }}
-            pathType: Prefix
+          - path: {{ $ingressPath }}
             backend:
               serviceName: {{ $fullName }}
-              servicePort: {{ $svcPort }}
-          {{- end }}
-    {{- end }}
+              servicePort: http
   {{- end }}
+{{- end }}

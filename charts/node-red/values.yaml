@@ -44,11 +44,12 @@ service:
 ingress:
   enabled: false
   annotations:
-    nginx.ingress.kubernetes.io/backend-protocol: HTTP
-    nginx.ingress.kubernetes.io/configuration-snippet: rewrite ^(/node-red)$ $1/ permanent;
-    nginx.ingress.kubernetes.io/rewrite-target: /$2
+    {}
+    # kubernetes.io/ingress.class: nginx
+    # kubernetes.io/tls-acme: "true"
+  path: /
   hosts:
-    - paths: ["/node-red(/|$)(.*)"]
+    - chart-example.local
   tls: []
   #  - secretName: chart-example-tls
   #    hosts:

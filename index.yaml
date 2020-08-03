@@ -139,6 +139,22 @@ entries:
   node-red:
   - apiVersion: v2
     appVersion: 1.0.6-12
+    created: "2020-08-03T19:06:00.431259215Z"
+    description: Node-RED is a flow-based programming tool, originally developed by
+      IBM’s Emerging Technology Services team and now a part of the JS Foundation.
+    digest: 6fa20cd49ab57a0750778cb9857ce3c0c1726af80562b0fb43e855241414b0cf
+    home: https://github.com/JanVanBraeckel/helm-charts
+    icon: https://nodered.org/about/resources/media/node-red-icon-2.png
+    maintainers:
+    - email: contact@janvanbraeckel.com
+      name: JanVanBraeckel
+    name: node-red
+    type: application
+    urls:
+    - https://github.com/JanVanBraeckel/helm-charts/releases/download/node-red-0.1.9/node-red-0.1.9.tgz
+    version: 0.1.9
+  - apiVersion: v2
+    appVersion: 1.0.6-12
     created: "2020-06-30T16:47:14.908595841Z"
     description: Node-RED is a flow-based programming tool, originally developed by
       IBM’s Emerging Technology Services team and now a part of the JS Foundation.

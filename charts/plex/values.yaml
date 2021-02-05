@@ -6,7 +6,7 @@
 
 image:
   repository: plexinc/pms-docker
-  tag: 1.19.4.2935-79e214ead
+  tag: 1.21.2.3943-a91458577
   pullPolicy: IfNotPresent
 
 #####   START  --> Official PLEX container environment variables
@@ -56,10 +56,12 @@ imagePullSecrets: []
 nameOverride: ""
 fullnameOverride: ""
 
-podSecurityContext: {}
+podSecurityContext:
+  {}
   # fsGroup: 2000
 
-securityContext: {}
+securityContext:
+  {}
   # capabilities:
   #   drop:
   #   - ALL
@@ -90,7 +92,8 @@ service:
 
 ingress:
   enabled: false
-  annotations: {}
+  annotations:
+    {}
     # kubernetes.io/ingress.class: nginx
     # kubernetes.io/tls-acme: "true"
   path: /
@@ -130,7 +133,7 @@ plexPreferences:
     name: 41-plex-preferences
   volume:
     name: 41-plex-preferences
-    defaultMode: 493  # 0755 in octal permission notation
+    defaultMode: 493 # 0755 in octal permission notation
     # Using mountPath & SubPath allow you to volume mount a configMap AS A FILE
     # Unfortunately this also means that updates to the configMap are not automtically
     # propagated to the file contents. But it's better then replacing the entire
@@ -170,7 +173,6 @@ persistence:
       medium: ""
   #   medium: "Memory"
 
-
   data:
     # Optionally specify claimName to manually override the PVC to be used for
     # the data directory. If claimName is specified, storageClass and size are
@@ -187,7 +189,8 @@ persistence:
     # Access mode for this volume
     accessMode: ReadWriteOnce
 
-  extraData: []
+  extraData:
+    []
     # Optionally specifify additional Data mounts.  These will be mounted as
     # /data-${name}.  This should be in the same format as the above 'data',
     # with the additional field 'name'
@@ -232,7 +235,7 @@ certificate:
       name: 42-pkcs-mangler
     volume:
       name: 42-pkcs-mangler
-      defaultMode: 493  # 0755 in octal permission notation
+      defaultMode: 493 # 0755 in octal permission notation
       # Using mountPath & SubPath allow you to volume mount a configMap AS A FILE
       # Unfortunately this also means that updates to the configMap are not automtically
       # propagated to the file contents. But it's better then replacing the entire
@@ -241,8 +244,8 @@ certificate:
       mountPath: /etc/cont-init.d/42-pkcs-mangler
       subPath: 42-pkcs-mangler
     setPlexPreferences:
-      enabled: true  # Set Plex Preferences related to Certificates
-      customCertificateDomain: ""  # If not empty, Set the Plex Preference customCertificateDomain
+      enabled: true # Set Plex Preferences related to Certificates
+      customCertificateDomain: "" # If not empty, Set the Plex Preference customCertificateDomain
       # Use spec.certificate.pkcsMangler.pfxPassword.value to Set the Plex Preference customCertificateKey
       # Use spec.certificate.pkcsMangler.pfxInContainerPath to Set the Plex Preference customCertificatePath
     pfxPassword:
@@ -253,7 +256,7 @@ certificate:
       passwordKey: "pfx-password"
       labels: {}
       annotations: {}
-    pfxInContainerPath: "/config/plex.pfx"  # This is full path in the container pkcsMangler will copy the pfx file to
+    pfxInContainerPath: "/config/plex.pfx" # This is full path in the container pkcsMangler will copy the pfx file to
     # This is the SSL Certificate Secret that will provide our crt and key file.  If you used cert-manager to create
     # the certificate, these defaults should work for you.  This Secret (and volume details) are only used by the
     # pkcsMangler Init Container.
@@ -276,7 +279,8 @@ probes:
     failureThreshold: 5
     timeoutSeconds: 5
 
-resources: {}
+resources:
+  {}
   # We usually recommend not to specify default resources and to leave this as a conscious
   # choice for the user. This also increases chances charts run on environments with little
   # resources, such as Minikube. If you do want to specify resources, uncomment the following

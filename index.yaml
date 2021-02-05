@@ -289,6 +289,22 @@ entries:
     version: 0.1.0
   plex:
   - apiVersion: v2
+    appVersion: 1.21.2.3943-a91458577
+    created: "2021-02-05T09:51:29.954388924Z"
+    description: Plex Media Server (PMS) is the back-end media server component of
+      Plex, free of charge.
+    digest: 4a57c9b3b8bf5b4d048a0eb4dceeeae2ad57d71b7b60edc3d0aaddb68bfdad90
+    home: https://github.com/JanVanBraeckel/helm-charts
+    icon: https://www.plex.tv/wp-content/themes/plex/assets/img/plex-logo.svg
+    maintainers:
+    - email: contact@janvanbraeckel.com
+      name: JanVanBraeckel
+    name: plex
+    type: application
+    urls:
+    - https://github.com/JanVanBraeckel/helm-charts/releases/download/plex-0.1.2/plex-0.1.2.tgz
+    version: 0.1.2
+  - apiVersion: v2
     appVersion: 1.19.4.2935-79e214ead
     created: "2020-07-05T17:40:52.234940043Z"
     description: Plex Media Server (PMS) is the back-end media server component of

@@ -86,6 +86,24 @@ entries:
     version: 0.1.1
   jackett-vpn:
   - apiVersion: v2
+    appVersion: v0.17.456
+    created: "2021-02-05T09:24:06.281601169Z"
+    description: 'Jackett works as a proxy server: it translates queries from apps
+      (Sonarr, Radarr, SickRage, CouchPotato, Mylar, Lidarr, DuckieTV, qBittorrent,
+      Nefarious etc.) into tracker-site-specific http queries, parses the html response,
+      then sends results back to the requesting software.'
+    digest: 846ba0ca5e654ca2f38f227b4f1fb9b748f6e7b56f539b8d005a2538ecf11d61
+    home: https://github.com/JanVanBraeckel/helm-charts
+    icon: https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/jackett-banner.png
+    maintainers:
+    - email: contact@janvanbraeckel.com
+      name: JanVanBraeckel
+    name: jackett-vpn
+    type: application
+    urls:
+    - https://github.com/JanVanBraeckel/helm-charts/releases/download/jackett-vpn-0.1.1/jackett-vpn-0.1.1.tgz
+    version: 0.1.1
+  - apiVersion: v2
     appVersion: v0.16.817
     created: "2020-07-11T20:37:42.072096303Z"
     description: 'Jackett works as a proxy server: it translates queries from apps
